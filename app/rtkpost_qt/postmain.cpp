@@ -163,7 +163,7 @@ void ProcessingThread::run()
 {
     if ((stat=postpos(ts,te,ti,tu,&prcopt,&solopt,&filopt,infile,n,outfile,
                       rov,base))==1) {
-        showmsg("aborted");
+        showmsg((char*)"aborted");
     };
     emit done(stat);
 }
@@ -482,15 +482,15 @@ void MainForm::BtnExecClick()
     QString OutputFile_Text=OutputFile->currentText();
     
     if (InputFile1->currentText()=="") {
-        showmsg("error : no rinex obs file (rover)");
+        showmsg((char*)"error : no rinex obs file (rover)");
         return;
     }
     if (InputFile2->currentText()==""&&PMODE_DGPS<=PosMode&&PosMode<=PMODE_FIXED) {
-        showmsg("error : no rinex obs file (base station)");
+        showmsg((char*)"error : no rinex obs file (base station)");
         return;
     }
     if (OutputFile->currentText()=="") {
-        showmsg("error : no output file");
+        showmsg((char*)"error : no output file");
         return;
     }
     if (OutputFile_Text.contains(".obs",Qt::CaseInsensitive)||
@@ -502,10 +502,10 @@ void MainForm::BtnExecClick()
         OutputFile_Text.contains(QRegExp(".??d",Qt::CaseInsensitive))||
         OutputFile_Text.contains(QRegExp(".??n",Qt::CaseInsensitive))||
         OutputFile_Text.contains(QRegExp(".??g",Qt::CaseInsensitive))){
-        showmsg("error : invalid extension of output file (%s)",qPrintable(OutputFile_Text));
+        showmsg((char*)"error : invalid extension of output file (%s)",qPrintable(OutputFile_Text));
         return;
     }
-    showmsg("");
+    showmsg((char*)"");
     BtnAbort ->setVisible(true);
     BtnExec  ->setVisible(false);
     BtnExit  ->setEnabled(false);
@@ -534,7 +534,7 @@ void MainForm::ProcessingFinished(int stat)
     }
 
     if (Message->text().contains("processing")) {
-        showmsg("done");
+        showmsg((char*)"done");
     }
     BtnAbort ->setVisible(false);
     BtnExec  ->setVisible(true);
@@ -550,7 +550,7 @@ void MainForm::ProcessingFinished(int stat)
 void MainForm::BtnAbortClick()
 {
     AbortFlag=1;
-    showmsg("aborted");
+    showmsg((char*)"aborted");
 }
 // callback on button-exit --------------------------------------------------
 void MainForm::BtnExitClick()
@@ -856,7 +856,7 @@ void MainForm::ExecProc(void)
         thread->addInput(InputFile3_Text);
     }
     else if (!ObsToNav(InputFile1_Text,temp)) {
-        showmsg("error: no navigation data");
+        showmsg((char*)"error: no navigation data");
         ProcessingFinished(0);
         return;
     } else thread->addInput(temp);
@@ -884,7 +884,7 @@ void MainForm::ExecProc(void)
 
     Progress->setValue(0);
     Progress->setVisible(true);
-    showmsg("reading...");
+    showmsg((char*)"reading...");
 
     setCursor(Qt::WaitCursor);
     

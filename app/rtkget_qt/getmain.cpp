@@ -642,7 +642,7 @@ void MainForm::LoadUrl(QString file)
 {
     url_t *urls;
     QString subtype, basetype;
-    char *sel[]={"*"};
+    char *sel[]={(char*)"*"};
     int i,n;
     
     urls=new url_t [MAX_URL];

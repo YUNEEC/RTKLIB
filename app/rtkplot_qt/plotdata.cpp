@@ -984,7 +984,7 @@ void Plot::SaveElMask(const QString &file)
 // connect to external sources ----------------------------------------------
 void Plot::Connect(void)
 {
-    char cmd[1024],path[1024],buff[MAXSTRPATH],*name[2]={"",""},*p;
+    char cmd[1024],path[1024],buff[MAXSTRPATH],*name[2]={(char*)"",(char*)""},*p;
     int i,mode=STR_MODE_R;
     
     trace(3,"Connect\n");

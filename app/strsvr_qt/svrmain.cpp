@@ -598,7 +598,7 @@ void MainForm::SvrStart(void)
     }
     // stream server start
     char *cmds[] = {cmd};
-    char *cmds_periodic[] = {};
+    char *cmds_periodic[] = {0};
     if (!strsvrstart(&strsvr,opt,strs,paths,conv,cmds,cmds_periodic,AntPos)) return;
 
     StartTime=utc2gpst(timeget());

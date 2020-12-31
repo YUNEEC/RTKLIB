@@ -33,9 +33,9 @@ macx{
 }
 win32 {
     CONFIG(debug) {
-        RTKLIB = ../../src/debug/libRTKLib.a
+        RTKLIB = ../../src/debug/RTKLib.lib
     } else {
-        RTKLIB =../../src/release/libRTKLib.a
+        RTKLIB =../../src/release/RTKLib.lib
     }
 
     LIBS+= $${RTKLIB} -lWs2_32 -lwinmm
