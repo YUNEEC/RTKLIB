@@ -15,7 +15,7 @@ jobs:
       matrix:
         qt_ver: [5.12.10]
         qt_target: [desktop]
-        qt_arch: [win64_msvc2017_64,win32_msvc2019]
+        qt_arch: [win64_msvc2017_64,win32_msvc2017]
         include:
           - qt_arch: win64_msvc2017_64
             msvc_arch: x64
