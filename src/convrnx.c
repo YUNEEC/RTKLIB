@@ -296,7 +296,7 @@ static strfile_t *gen_strfile(int format, const char *opt, gtime_t time)
         str->nav=&str->rtcm.nav; 
         strcpy(str->rtcm.opt,opt);
     }
-    else if (format<=MAXRCVFMT) {
+    else if (format<=MAXRCVFMT||format==STRFMT_UNICORE) {
         if (!init_raw(&str->raw,format)) {
             showmsg("init raw error");
             return 0;
@@ -328,7 +328,7 @@ static void free_strfile(strfile_t *str)
     if (str->format==STRFMT_RTCM2||str->format==STRFMT_RTCM3) {
         free_rtcm(&str->rtcm);
     }
-    else if (str->format<=MAXRCVFMT) {
+    else if (str->format<=MAXRCVFMT||str->format==STRFMT_UNICORE) {
         free_raw(&str->raw);
     }
     else if (str->format==STRFMT_RINEX) {
@@ -355,7 +355,7 @@ static int input_strfile(strfile_t *str)
             str->sat=str->rtcm.ephsat;
         }
     }
-    else if (str->format<=MAXRCVFMT) {
+    else if (str->format<=MAXRCVFMT||str->format==STRFMT_UNICORE) {
         if ((type=input_rawf(&str->raw,str->format,str->fp))>=1) {
             str->time=str->raw.time;
             str->sat=str->raw.ephsat;
@@ -382,7 +382,7 @@ static int open_strfile(strfile_t *str, const char *file)
             return 0;
         }
     }
-    else if (str->format<=MAXRCVFMT) {
+    else if (str->format<=MAXRCVFMT||str->format==STRFMT_UNICORE) {
         if (!(str->fp=fopen(file,"rb"))) {
             showmsg("log open error: %s",file);
             return 0;
@@ -417,7 +417,7 @@ static void close_strfile(strfile_t *str)
     if (str->format==STRFMT_RTCM2||str->format==STRFMT_RTCM3) {
         if (str->fp) fclose(str->fp);
     }
-    else if (str->format<=MAXRCVFMT) {
+    else if (str->format<=MAXRCVFMT||str->format==STRFMT_UNICORE) {
         if (str->fp) fclose(str->fp);
     }
     else if (str->format==STRFMT_RINEX) {
@@ -906,8 +906,8 @@ static void closefile(FILE **ofp, const rnxopt_t *opt, nav_t *nav)
             case 3: outrnxhnavh(ofp[3],opt,nav); break;
             case 4: outrnxqnavh(ofp[4],opt,nav); break;
             case 5: outrnxlnavh(ofp[5],opt,nav); break;
-            case 6: outrnxlnavh(ofp[6],opt,nav); break;
-            case 7: outrnxlnavh(ofp[7],opt,nav); break;
+            case 6: outrnxcnavh(ofp[6],opt,nav); break;
+            case 7: outrnxinavh(ofp[7],opt,nav); break;
         }
         fclose(ofp[i]);
     }
