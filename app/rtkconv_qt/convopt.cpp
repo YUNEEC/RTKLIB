@@ -27,6 +27,8 @@ ConvOptDialog::ConvOptDialog(QWidget *parent)
     connect(RnxFile,SIGNAL(clicked(bool)),this,SLOT(RnxFileClick()));
     connect(RnxVer,SIGNAL(currentIndexChanged(int)),this,SLOT(RnxVerChange()));
 
+    TimeTol->setValidator(new QDoubleValidator());
+
 	UpdateEnable();
 }
 //---------------------------------------------------------------------------
@@ -58,9 +60,10 @@ void ConvOptDialog::showEvent(QShowEvent *event)
     Comment0->setText(mainWindow->Comment[0]);
     Comment1->setText(mainWindow->Comment[1]);
     RcvOption->setText(mainWindow->RcvOption);
-    for (int i=0;i<6;i++) CodeMask[i]=mainWindow->CodeMask[i];
+    for (int i=0;i<7;i++) CodeMask[i]=mainWindow->CodeMask[i];
     AutoPos->setChecked(mainWindow->AutoPos);
     ScanObs->setChecked(mainWindow->ScanObs);
+    HalfCyc->setChecked(mainWindow->HalfCyc);
     OutIono->setChecked(mainWindow->OutIono);
     OutTime->setChecked(mainWindow->OutTime);
     OutLeaps->setChecked(mainWindow->OutLeaps);
@@ -84,7 +87,9 @@ void ConvOptDialog::showEvent(QShowEvent *event)
     Freq7->setChecked(mainWindow->FreqType&FREQTYPE_S);
     ExSats->setText(mainWindow->ExSats);
     TraceLevel->setCurrentIndex(mainWindow->TraceLevel);
-	
+    ChkSepNav->setChecked(mainWindow->SepNav);
+    TimeTol->setText(QString::number(mainWindow->TimeTol));
+
 	UpdateEnable();
 }
 //---------------------------------------------------------------------------
@@ -114,7 +119,7 @@ void ConvOptDialog::BtnOkClick()
     mainWindow->Comment[0]=Comment0->text();
     mainWindow->Comment[1]=Comment1->text();
     mainWindow->RcvOption=RcvOption->text();
-    for (int i=0;i<6;i++) mainWindow->CodeMask[i]=CodeMask[i];
+    for (int i=0;i<7;i++) mainWindow->CodeMask[i]=CodeMask[i];
     mainWindow->AutoPos=AutoPos->isChecked();
     mainWindow->ScanObs=ScanObs->isChecked();
     mainWindow->OutIono=OutIono->isChecked();
@@ -144,6 +149,8 @@ void ConvOptDialog::BtnOkClick()
     mainWindow->FreqType=freqtype;
     mainWindow->ExSats=ExSats->text();
     mainWindow->TraceLevel=TraceLevel->currentIndex();
+    mainWindow->SepNav=ChkSepNav->isChecked();
+    mainWindow->TimeTol=TimeTol->text().toDouble();
 
     accept();
 }
@@ -192,6 +199,7 @@ void ConvOptDialog::UpdateEnable(void)
     AppPos0->setEnabled(AutoPos->isChecked());
     AppPos1->setEnabled(AutoPos->isChecked());
     AppPos2->setEnabled(AutoPos->isChecked());
+    ChkSepNav->setEnabled(RnxVer->currentIndex()>=3);
 }
 //---------------------------------------------------------------------------
 

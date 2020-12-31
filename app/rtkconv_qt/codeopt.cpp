@@ -198,7 +198,7 @@ void CodeOptDialog::BtnOkClick()
     if (S25->isChecked()) mask[4][24]='1';
     if (S26->isChecked()) mask[4][25]='1';
 
-    for (int i=0;i<6;i++) convOptDialog->CodeMask[i]=mask[i];
+    for (int i=0;i<7;i++) convOptDialog->CodeMask[i]=mask[i];
 
     accept();
 }

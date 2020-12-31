@@ -26,12 +26,12 @@ class ConversionThread : public QThread
 {
     Q_OBJECT
 public:
-    char ifile[1024],*ofile[7];
+    char ifile[1024],*ofile[9];
     rnxopt_t rnxopt;
     int format;
 
     explicit ConversionThread(QObject *parent):QThread(parent){
-        for (int i=0;i<7;i++)
+        for (int i=0;i<9;i++)
         {
             ofile[i]=new char[1024];
             ofile[i][0]='\0';
@@ -42,7 +42,7 @@ public:
     }
 
     ~ConversionThread() {
-        for (int i=0;i<7;i++) delete[] ofile[i];
+        for (int i=0;i<9;i++) delete[] ofile[i];
     }
 
 protected:
@@ -101,6 +101,10 @@ public slots:
     void BtnOutFileView7Click();
     void BtnInFileViewClick();
     void ConversionFinished();
+    void BtnOutFile8Click();
+    void BtnOutFileView8Click();
+    void BtnOutFile9Click();
+    void BtnOutFileView9Click();
     void UpdateEnable();
 
 private:
@@ -131,10 +135,10 @@ public:
 	gtime_t RnxTime;
     QString RunBy,Marker,MarkerNo,MarkerType,Name[2],Rec[3],Ant[3];
     QString RnxCode,Comment[2],RcvOption,ExSats;
-    QString CodeMask[6];
-	double AppPos[3],AntDel[3];
+    QString CodeMask[7];
+	double AppPos[3],AntDel[3],TimeTol;
 	int RnxVer,RnxFile,NavSys,ObsType,FreqType,TraceLevel,EventEna;
-	int AutoPos,ScanObs,OutIono,OutTime,OutLeaps;
+	int AutoPos,ScanObs,HalfCyc,OutIono,OutTime,OutLeaps,SepNav;
 	
     explicit MainWindow(QWidget *parent=0);
 };
