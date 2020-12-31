@@ -168,13 +168,13 @@ static int sat2code(int sat, char *code)
 {
     int prn;
     switch (satsys(sat,&prn)) {
-        case SYS_GPS: sprintf(code,"G%2d",prn-MINPRNGPS+1); break;
-        case SYS_GLO: sprintf(code,"R%2d",prn-MINPRNGLO+1); break;
-        case SYS_GAL: sprintf(code,"E%2d",prn-MINPRNGAL+1); break;
-        case SYS_SBS: sprintf(code,"S%2d",prn-100); break;
-        case SYS_QZS: sprintf(code,"J%2d",prn-MINPRNQZS+1); break;
-        case SYS_CMP: sprintf(code,"C%2d",prn-MINPRNCMP+1); break;
-        case SYS_IRN: sprintf(code,"I%2d",prn-MINPRNIRN+1); break;
+        case SYS_GPS: sprintf(code,"G%02d",prn-MINPRNGPS+1); break;
+        case SYS_GLO: sprintf(code,"R%02d",prn-MINPRNGLO+1); break;
+        case SYS_GAL: sprintf(code,"E%02d",prn-MINPRNGAL+1); break;
+        case SYS_SBS: sprintf(code,"S%02d",prn-100); break;
+        case SYS_QZS: sprintf(code,"J%02d",prn-MINPRNQZS+1); break;
+        case SYS_CMP: sprintf(code,"C%02d",prn-MINPRNCMP+1); break;
+        case SYS_IRN: sprintf(code,"I%02d",prn-MINPRNIRN+1); break;
         default: return 0;
     }
     return 1;
