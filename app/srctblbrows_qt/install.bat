@@ -1,1 +1,1 @@
-copy release\srctblbrows_qt.exe ..\..\..\RTKLIB_bin\bin
+copy release\srctblbrows_qt.exe ..\..\bin

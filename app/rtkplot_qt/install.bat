@@ -1,1 +1,1 @@
-copy release\rtkplot_qt.exe ..\..\..\RTKLIB_bin\bin
+copy release\rtkplot_qt.exe ..\..\bin

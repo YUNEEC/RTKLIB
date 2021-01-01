@@ -1,1 +1,1 @@
-copy release\rtknavi_qt.exe ..\..\..\RTKLIB_bin\bin
+copy release\rtknavi_qt.exe ..\..\bin
