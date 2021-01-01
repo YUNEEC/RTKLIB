@@ -469,6 +469,8 @@ void OptDialog::GetOpt(void)
     FieldSep	 ->setText(mainForm->FieldSep);
     OutputHead	 ->setCurrentIndex(mainForm->OutputHead);
     OutputOpt	 ->setCurrentIndex(mainForm->OutputOpt);
+    OutputSingle ->setCurrentIndex(mainForm->OutputSingle);
+    MaxSolStd    ->setText(QString("%1.2g").arg(mainForm->MaxSolStd));
     OutputDatum  ->setCurrentIndex(mainForm->OutputDatum);
     OutputHeight ->setCurrentIndex(mainForm->OutputHeight);
     OutputGeoid  ->setCurrentIndex(mainForm->OutputGeoid);
@@ -592,6 +594,8 @@ void OptDialog::SetOpt(void)
     mainForm->FieldSep	  	=FieldSep   ->text();
     mainForm->OutputHead  	=OutputHead ->currentIndex();
     mainForm->OutputOpt   	=OutputOpt  ->currentIndex();
+    mainForm->OutputSingle  =OutputSingle->currentIndex();
+    mainForm->MaxSolStd     =MaxSolStd->text().toDouble();
     mainForm->OutputDatum 	=OutputDatum->currentIndex();
     mainForm->OutputHeight	=OutputHeight->currentIndex();
     mainForm->OutputGeoid 	=OutputGeoid->currentIndex();
@@ -690,6 +694,7 @@ void OptDialog::LoadOpt(const QString &file)
     NavSys4	     ->setChecked(prcopt.navsys&SYS_QZS);
     NavSys5	     ->setChecked(prcopt.navsys&SYS_SBS);
     NavSys6	     ->setChecked(prcopt.navsys&SYS_CMP);
+    NavSys7	     ->setChecked(prcopt.navsys&SYS_IRN);
     PosOpt1	     ->setChecked(prcopt.posopt[0]);
     PosOpt2	     ->setChecked(prcopt.posopt[1]);
     PosOpt3	     ->setChecked(prcopt.posopt[2]);
@@ -726,6 +731,8 @@ void OptDialog::LoadOpt(const QString &file)
     FieldSep	 ->setText(solopt.sep);
     OutputHead	 ->setCurrentIndex(solopt.outhead);
     OutputOpt	 ->setCurrentIndex(solopt.outopt);
+    OutputSingle ->setCurrentIndex(prcopt.outsingle);
+    MaxSolStd    ->setText(QString("%1.2g").arg(solopt.maxsolstd));
     OutputDatum  ->setCurrentIndex(solopt.datum);
     OutputHeight ->setCurrentIndex(solopt.height);
     OutputGeoid  ->setCurrentIndex(solopt.geoid);
@@ -833,7 +840,8 @@ void OptDialog::SaveOpt(const QString &file)
                       (NavSys3->isChecked()?SYS_GAL:0)|
                       (NavSys4->isChecked()?SYS_QZS:0)|
                       (NavSys5->isChecked()?SYS_SBS:0)|
-                      (NavSys6->isChecked()?SYS_CMP:0);
+                      (NavSys6->isChecked()?SYS_CMP:0)|
+                      (NavSys7->isChecked()?SYS_IRN:0);
     prcopt.posopt[0]=PosOpt1	->isChecked();
     prcopt.posopt[1]=PosOpt2	->isChecked();
     prcopt.posopt[2]=PosOpt3	->isChecked();
@@ -871,6 +879,8 @@ void OptDialog::SaveOpt(const QString &file)
     strcpy(solopt.sep,qPrintable(FieldSep_Text));
     solopt.outhead	=OutputHead	 ->currentIndex();
     solopt.outopt	=OutputOpt	 ->currentIndex();
+    prcopt.outsingle=OutputSingle->currentIndex();
+    solopt.maxsolstd=MaxSolStd->text().toDouble();
     solopt.datum	=OutputDatum ->currentIndex();
     solopt.height	=OutputHeight->currentIndex();
     solopt.geoid	=OutputGeoid ->currentIndex();
@@ -937,7 +947,7 @@ void OptDialog::UpdateEnable(void)
 	
     Freq           ->setEnabled(rel||ppp);
     Solution       ->setEnabled(rel||ppp);
-    DynamicModel   ->setEnabled(rel);
+    DynamicModel   ->setEnabled(PosMode->currentIndex()==PMODE_KINEMA||PosMode->currentIndex()==PMODE_PPP_KINEMA);
     TideCorr       ->setEnabled(rel||ppp);
     //IonoOpt        ->setEnabled(!ppp);
     PosOpt1        ->setEnabled(ppp);
@@ -972,6 +982,7 @@ void OptDialog::UpdateEnable(void)
     TimeDecimal    ->setEnabled(SolFormat->currentIndex()<3);
     LatLonFormat   ->setEnabled(SolFormat->currentIndex()==0);
     FieldSep       ->setEnabled(SolFormat->currentIndex()<3);
+    OutputSingle   ->setEnabled(PosMode->currentIndex()!=0);
     OutputDatum    ->setEnabled(SolFormat->currentIndex()==0);
     OutputHeight   ->setEnabled(SolFormat->currentIndex()==0);
     OutputGeoid    ->setEnabled(SolFormat->currentIndex()==0&&OutputHeight->currentIndex()==1);
