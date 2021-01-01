@@ -122,6 +122,7 @@ void ConvOptDialog::BtnOkClick()
     for (int i=0;i<7;i++) mainWindow->CodeMask[i]=CodeMask[i];
     mainWindow->AutoPos=AutoPos->isChecked();
     mainWindow->ScanObs=ScanObs->isChecked();
+    mainWindow->HalfCyc=HalfCyc->isChecked();
     mainWindow->OutIono=OutIono->isChecked();
     mainWindow->OutTime=OutTime->isChecked();
     mainWindow->OutLeaps=OutLeaps->isChecked();
