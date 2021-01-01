@@ -61,12 +61,9 @@ jobs:
         call install_qtapp.bat
         cd ..
 
-    - name: Set actions allow unsecure commands
-      run: |
-         echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
-
     - name: package
       env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
         archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
       shell: pwsh
@@ -84,6 +81,7 @@ jobs:
       if: startsWith(github.event.ref, 'refs/tags/')
       shell: pwsh
       env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         githubFullName: ${{ github.event.repository.full_name }}
         ref: ${{ github.event.ref }}
       run: |
@@ -121,6 +119,7 @@ jobs:
       if: startsWith(github.event.ref, 'refs/tags/')
       shell: pwsh
       env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         githubFullName: ${{ github.event.repository.full_name }}
         upUrl: ${{ steps.createReleaseWin.outputs.upload_url }}
         ref: ${{ github.event.ref }}
