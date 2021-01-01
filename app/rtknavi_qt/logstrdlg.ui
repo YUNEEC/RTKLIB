@@ -83,6 +83,11 @@
      </item>
      <item>
       <property name="text">
+       <string>NTRIP Caster</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>File</string>
       </property>
      </item>
@@ -114,6 +119,11 @@
      <item>
       <property name="text">
        <string>NTRIP Server</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>NTRIP Caster</string>
       </property>
      </item>
      <item>
@@ -336,6 +346,11 @@
      <item>
       <property name="text">
        <string>NTRIP Server</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>NTRIP Caster</string>
       </property>
      </item>
      <item>
