@@ -1,10 +1,17 @@
+# FROM: https://github.com/jaredtao/HelloActions-Qt/blob/master/.github/workflows/windows.yml
 name: Windows
 
 on:
   push:
+    paths-ignored:
+    - 'README.md'
+    - 'LICENSE'
     branches:
     - develop
   pull_request:
+    paths-ignored:
+    - 'README.md'
+    - 'LICENSE'
     branches:
     - develop
 
@@ -48,7 +55,5 @@ jobs:
         vc_arch: ${{ matrix.msvc_arch }}
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
-        mkdir -p build
-        cd build
-        qmake ../RTKLib.pro
+        qmake
         nmake
