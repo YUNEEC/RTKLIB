@@ -3,19 +3,22 @@ name: Windows
 
 on:
   push:
-    paths-ignored:
-    - 'README.md'
-    - 'LICENSE'
-    branches:
-    - develop
+    branches: develop
+
+    # sequence of patterns matched against refs/tags/
     tags:
-    - [0-9]+.[0-9]+.[0-9]+
-  pull_request:
+    - v[0-9]+.[0-9]+.[0-9]+
+
     paths-ignored:
     - 'README.md'
     - 'LICENSE'
-    branches:
-    - develop
+
+  pull_request:
+    branches: develop
+
+    paths-ignored:
+    - 'README.md'
+    - 'LICENSE'
 
 jobs:
   build:
