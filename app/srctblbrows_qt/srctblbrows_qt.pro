@@ -33,7 +33,7 @@ macx{
     LIBS+= $${RTKLIB}
 }
 win32 {
-    CONFIG(debug) {
+    CONFIG(debug, debug|release) {
         RTKLIB = ../../src/debug/RTKLib.lib
     } else {
         RTKLIB =../../src/release/RTKLib.lib
