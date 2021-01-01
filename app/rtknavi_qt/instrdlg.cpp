@@ -270,14 +270,18 @@ void  InputStrDialog::BtnCmd2Click()
     if (Stream2->currentIndex()==0) {
         cmdOptDialog->Cmds  [0]=Cmds  [1][0];
         cmdOptDialog->Cmds  [1]=Cmds  [1][1];
+        cmdOptDialog->Cmds  [2]=Cmds  [1][2];
         cmdOptDialog->CmdEna[0]=CmdEna[1][0];
         cmdOptDialog->CmdEna[1]=CmdEna[1][1];
+        cmdOptDialog->CmdEna[2]=CmdEna[1][2];
 	}
 	else {
         cmdOptDialog->Cmds  [0]=CmdsTcp  [1][0];
         cmdOptDialog->Cmds  [1]=CmdsTcp  [1][1];
+        cmdOptDialog->Cmds  [2]=CmdsTcp  [1][2];
         cmdOptDialog->CmdEna[0]=CmdEnaTcp[1][0];
         cmdOptDialog->CmdEna[1]=CmdEnaTcp[1][1];
+        cmdOptDialog->CmdEna[2]=CmdEnaTcp[1][2];
 	}
 
     cmdOptDialog->exec();
@@ -286,14 +290,17 @@ void  InputStrDialog::BtnCmd2Click()
     if (Stream2->currentIndex()==0) {
         Cmds  [1][0]=cmdOptDialog->Cmds  [0];
         Cmds  [1][1]=cmdOptDialog->Cmds  [1];
+        Cmds  [1][2]=cmdOptDialog->Cmds  [2];
         CmdEna[1][0]=cmdOptDialog->CmdEna[0];
         CmdEna[1][1]=cmdOptDialog->CmdEna[1];
+        CmdEna[1][2]=cmdOptDialog->CmdEna[2];
 	}
 	else {
         CmdsTcp  [1][0]=cmdOptDialog->Cmds  [0];
         CmdsTcp  [1][1]=cmdOptDialog->Cmds  [1];
+        CmdsTcp  [1][2]=cmdOptDialog->Cmds  [2];
         CmdEnaTcp[1][0]=cmdOptDialog->CmdEna[0];
-        CmdEnaTcp[1][1]=cmdOptDialog->CmdEna[1];
+        CmdEnaTcp[1][2]=cmdOptDialog->CmdEna[2];
 	}
 }
 //---------------------------------------------------------------------------
@@ -302,14 +309,18 @@ void  InputStrDialog::BtnCmd3Click()
     if (Stream3->currentIndex()==0) {
         cmdOptDialog->Cmds  [0]=Cmds  [2][0];
         cmdOptDialog->Cmds  [1]=Cmds  [2][1];
+        cmdOptDialog->Cmds  [2]=Cmds  [2][2];
         cmdOptDialog->CmdEna[0]=CmdEna[2][0];
         cmdOptDialog->CmdEna[1]=CmdEna[2][1];
+        cmdOptDialog->CmdEna[2]=CmdEna[2][2];
 	}
 	else {
         cmdOptDialog->Cmds  [0]=CmdsTcp  [2][0];
         cmdOptDialog->Cmds  [1]=CmdsTcp  [2][1];
+        cmdOptDialog->Cmds  [2]=CmdsTcp  [2][2];
         cmdOptDialog->CmdEna[0]=CmdEnaTcp[2][0];
         cmdOptDialog->CmdEna[1]=CmdEnaTcp[2][1];
+        cmdOptDialog->CmdEna[2]=CmdEnaTcp[2][2];
 	}
 
     cmdOptDialog->exec();
@@ -318,14 +329,18 @@ void  InputStrDialog::BtnCmd3Click()
     if (Stream3->currentIndex()==0) {
         Cmds  [2][0]=cmdOptDialog->Cmds  [0];
         Cmds  [2][1]=cmdOptDialog->Cmds  [1];
+        Cmds  [2][2]=cmdOptDialog->Cmds  [2];
         CmdEna[2][0]=cmdOptDialog->CmdEna[0];
         CmdEna[2][1]=cmdOptDialog->CmdEna[1];
+        CmdEna[2][2]=cmdOptDialog->CmdEna[2];
 	}
 	else {
         CmdsTcp  [2][0]=cmdOptDialog->Cmds  [0];
         CmdsTcp  [2][1]=cmdOptDialog->Cmds  [1];
+        CmdsTcp  [2][2]=cmdOptDialog->Cmds  [2];
         CmdEnaTcp[2][0]=cmdOptDialog->CmdEna[0];
         CmdEnaTcp[2][1]=cmdOptDialog->CmdEna[1];
+        CmdEnaTcp[2][2]=cmdOptDialog->CmdEna[2];
 	}
 }
 //---------------------------------------------------------------------------
