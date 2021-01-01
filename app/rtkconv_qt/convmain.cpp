@@ -947,7 +947,7 @@ void MainWindow::LoadOpt(void)
     QSettings ini(IniFile,QSettings::IniFormat);
     QString mask="1111111111111111111111111111111111111111111111111111111";
     
-    RnxVer              =ini.value ("opt/rnxver",      0).toInt();
+    RnxVer              =ini.value ("opt/rnxver",      6).toInt();
     RnxFile             =ini.value ("opt/rnxfile",     0).toInt();
     RnxCode             =ini.value ("opt/rnxcode","0000").toString();
     RunBy               =ini.value ("opt/runby",      "").toString();
