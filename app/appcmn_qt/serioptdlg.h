@@ -18,14 +18,16 @@ protected:
     CmdOptDialog *cmdOptDialog;
 
     void  UpdatePortList(void);
+    void  UpdateEnable(void);
 
 public slots:
     void  BtnOkClick();
     void  BtnCmdClick();
+    void  OutTcpPortClick();
 
 public:
-    QString Path,Cmds[2];
-	int Opt,CmdEna[2];
+    QString Path,Cmds[3];
+	int Opt,CmdEna[3];
 
     explicit SerialOptDialog(QWidget*);
 };

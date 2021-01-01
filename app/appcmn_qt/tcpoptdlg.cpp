@@ -35,7 +35,7 @@
 void  TcpOptDialog::showEvent(QShowEvent* event)
 {
     QString ti[]={tr("TCP Server Options "),tr("TCP Client Options"),
-                      tr("NTRIP Server Options"),tr("NTRIP Client Options")};
+                      tr("NTRIP Server Options"),tr("NTRIP Client Options"),tr("NTRIP Caster Options")};
 
     if (event->spontaneous()) return;
 
@@ -51,9 +51,9 @@ void  TcpOptDialog::showEvent(QShowEvent* event)
     Passwd->setText(url.password());
     Str->setText(Str_Text);
 
-    Addr->setEnabled(Opt>=1);
-    MntPnt->setEnabled(Opt>=2);
-    User->setEnabled(Opt==3);
+    Addr->setEnabled(Opt>=1&&Opt<=3);
+    MntPnt->setEnabled(Opt>=2&&Opt<=3);
+    User->setEnabled(Opt>=3&&Opt<=4);
     Passwd->setEnabled(Opt>=2);
     Str->setEnabled(Opt==2);
     LabelAddr->setText(Opt>=2?tr("NTRIP Caster Host"):tr("TCP Server Address"));
@@ -74,7 +74,7 @@ void  TcpOptDialog::showEvent(QShowEvent* event)
 	for (int i=0;i<MAXHIST;i++) {
         if (MntpHist[i]!="") MntPnt->addItem(MntpHist[i]);
 	}
-    BtnNtrip->setVisible(Opt>=2);
+    BtnNtrip->setVisible(Opt==2||Opt==3);
 }
 //---------------------------------------------------------------------------
 void  TcpOptDialog::BtnOkClick()

@@ -43,6 +43,7 @@ void FileOptDialog::showEvent(QShowEvent *event)
     ChkTimeTag->setText(Opt?tr("TimeTag"):tr("Time"));
     TimeSpeed->setVisible(!Opt);
     TimeStart->setVisible(!Opt);
+    Chk64Bit->setVisible(!Opt);
     Label1   ->setText(Opt?tr("Output File Path"):tr("Input File Path"));
     Label2   ->setVisible(!Opt);
     Label3   ->setVisible(!Opt);
@@ -52,8 +53,9 @@ void FileOptDialog::showEvent(QShowEvent *event)
     BtnKey   ->setVisible(Opt);
     ChkTimeTag->setChecked(false);
 
-    if (!Opt) {
+    if (!Opt) { // input
         double speed=1.0,start=0.0;
+        int size_fpos = 4;
 
         QStringList tokens=Path.split("::");
 
@@ -61,8 +63,9 @@ void FileOptDialog::showEvent(QShowEvent *event)
         foreach (token, tokens)
         {
             if (token=="T") ChkTimeTag->setChecked(true);
-            if (token.contains("+")) start=token.toDouble();
+            if (token.contains("+")) start=token.mid(1).toDouble();
             if (token.contains("x")) speed=token.mid(1).toDouble();
+            if (token.contains("p=")) size_fpos=token.mid(2).toInt();
         }
 
 		if (start<=0.0) start=0.0;
@@ -76,10 +79,11 @@ void FileOptDialog::showEvent(QShowEvent *event)
             TimeSpeed->setCurrentIndex(TimeSpeed->count());
         }
         TimeStart->setText(QString::number(start));
+        Chk64Bit->setChecked(size_fpos==8);
 
         FilePath->setText(tokens.at(0));
 	}
-	else {
+	else { // output
         double intv=0.0;
 
         QStringList tokens=Path.split("::");
@@ -108,13 +112,16 @@ void FileOptDialog::BtnOkClick()
     QString str;
     bool okay;
 	
-	if (!Opt) {
+	if (!Opt) { // input
         Path=FilePath->text();
         if (ChkTimeTag->isChecked()) {
             Path=Path+"::T"+"::"+TimeSpeed->currentText()+"::+"+TimeStart->text();
 		}
+        if (Chk64Bit->isChecked()) {
+            Path=Path+"::P=8";
+        }
 	}
-	else {
+	else { // output
         Path=FilePath->text();
         if (ChkTimeTag->isChecked()) Path+="::T";
         str=SwapIntv->currentText();
@@ -150,6 +157,7 @@ void FileOptDialog::UpdateEnable(void)
 {
     TimeSpeed->setEnabled(ChkTimeTag->isChecked());
     TimeStart->setEnabled(ChkTimeTag->isChecked());
+    Chk64Bit ->setEnabled(ChkTimeTag->isChecked());
     Label2   ->setEnabled(ChkTimeTag->isChecked());
     Label3   ->setEnabled(ChkTimeTag->isChecked());
 }

@@ -51,10 +51,39 @@
      <property name="text">
       <string>Commands at shutdown</string>
      </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
    <item>
     <widget class="QPlainTextEdit" name="CloseCmd">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="plainText">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="ChkPeriodicCmd">
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="text">
+      <string>Periodic Commands</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="PeriodicCmd">
      <property name="enabled">
       <bool>true</bool>
      </property>

@@ -17,14 +17,15 @@ protected:
 
 public slots:
     void BtnOkClick();
-    void ChkCloseCmdClick();
     void ChkOpenCmdClick();
+    void ChkCloseCmdClick();
+    void ChkPeriodicCmdClick();
     void BtnLoadClick();
     void BtnSaveClick();
 
 public:
-    QString Cmds[2];
-    bool CmdEna[2];
+    QString Cmds[3];
+    bool CmdEna[3];
     explicit CmdOptDialog(QWidget* parent);
 };
 #endif

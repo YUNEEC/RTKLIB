@@ -27,6 +27,9 @@
     connect(BtnCmd,SIGNAL(clicked()),this,SLOT(BtnCmdClick()));
     connect(BtnOk,SIGNAL(clicked(bool)),this,SLOT(BtnOkClick()));
     connect(BtnCancel,SIGNAL(clicked(bool)),this,SLOT(reject()));
+    connect(OutTcpPort,SIGNAL(clicked(bool)),this,SLOT(OutTcpPortClick()));
+
+    TcpPort->setValidator(new QIntValidator(this));
 }
 //---------------------------------------------------------------------------
 void  SerialOptDialog::showEvent(QShowEvent *event)
@@ -54,12 +57,21 @@ void  SerialOptDialog::showEvent(QShowEvent *event)
     if (tokens.size()<6) return;
     FlowCtr->setCurrentIndex(tokens.at(5)=="off"?0:tokens.at(5)=="rts"?1:2);
 
+    if (tokens.size()<7) {
+        OutTcpPort->setEnabled(false);
+        TcpPort->setText("");
+    } else {
+        OutTcpPort->setEnabled(true);
+        TcpPort->setText(tokens.at(6));
+    }
+
     BtnCmd->setVisible(Opt);
+    UpdateEnable();
 }
 //---------------------------------------------------------------------------
 void  SerialOptDialog::BtnCmdClick()
 {
-	for (int i=0;i<2;i++) {
+	for (int i=0;i<3;i++) {
         cmdOptDialog->Cmds[i]=Cmds[i];
         cmdOptDialog->CmdEna[i]=CmdEna[i];
 	}
@@ -67,7 +79,7 @@ void  SerialOptDialog::BtnCmdClick()
     cmdOptDialog->exec();
     if (cmdOptDialog->result()!=QDialog::Accepted) return;
 
-    for (int i=0;i<2;i++) {
+    for (int i=0;i<3;i++) {
         Cmds[i]=cmdOptDialog->Cmds[i];
         CmdEna[i]=cmdOptDialog->CmdEna[i];
 	}
@@ -77,10 +89,14 @@ void  SerialOptDialog::BtnOkClick()
 {
     char const *parity[]={"n","e","o"},*fctr[]={"off","rts","xon"};
     QString Port_Text=Port->currentText(),BitRate_Text=BitRate->currentText();
+    QString TcpPort_Text=TcpPort->text();
 
     Path=QString("%1:%2:%3:%4:%5:%6").arg(Port_Text).arg(BitRate_Text)
             .arg(ByteSize->currentIndex()?8:7).arg(parity[Parity->currentIndex()])
             .arg(StopBits->currentIndex()?2:1).arg(fctr[FlowCtr->currentIndex()]);
+    if (OutTcpPort->isChecked()&&!TcpPort_Text.isEmpty()) {
+        Path+=QString(":%1").arg(TcpPort_Text);
+    }
 
     accept();
 }
@@ -103,5 +119,15 @@ void  SerialOptDialog::UpdatePortList(void)
         Port->addItem(ports.at(i).portName());
     }
 #endif
+}
+//---------------------------------------------------------------------------
+void  SerialOptDialog::UpdateEnable()
+{
+    TcpPort->setEnabled(OutTcpPort->isChecked());
+}
+//---------------------------------------------------------------------------
+void  SerialOptDialog::OutTcpPortClick()
+{
+    UpdateEnable();
 }
 //---------------------------------------------------------------------------

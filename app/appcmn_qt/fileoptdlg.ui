@@ -161,6 +161,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="Chk64Bit">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>64bit</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="Label4">
         <property name="enabled">
          <bool>true</bool>

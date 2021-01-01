@@ -108,6 +108,16 @@
        <string>230400</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>460800</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>921600</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item row="4" column="0">
@@ -265,7 +275,48 @@
      </item>
     </widget>
    </item>
-   <item row="7" column="0" colspan="4">
+   <item row="7" column="0" colspan="3">
+    <widget class="QWidget" name="widget22" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QCheckBox" name="OutTcpPort">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>Output Received Stream to TCP Port :</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="TcpPort">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string></string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="4">
     <widget class="QWidget" name="widget" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <property name="leftMargin">
