@@ -1,1 +1,1 @@
-copy release\rtkconv_qt.exe ..\..\..\RTKLIB_bin\bin
+copy release\rtkconv_qt.exe ..\..\bin
