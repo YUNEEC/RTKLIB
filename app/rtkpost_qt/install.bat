@@ -1,1 +1,1 @@
-copy release\rtkpost_qt.exe ..\..\..\RTKLIB_bin\bin
+copy release\rtkpost_qt.exe ..\..\bin
