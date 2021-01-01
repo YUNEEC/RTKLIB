@@ -57,3 +57,20 @@ jobs:
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
         qmake
         nmake
+        cd app
+        call install_qtapp.bat
+        cd ..
+
+    - name: package
+      env:
+        VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
+        archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+      shell: pwsh
+      run: |
+        New-Item -ItemType Directory ${env:archiveName}
+        Copy-Item bin\* ${env:archiveName}\
+        windeployqt --qmldir . ${env:archiveName}\${env:targetName}
+        Compress-Archive -Path ${env:archiveName} ${env:archiveName}'.zip'
+        $name = ${env:archiveName}
+        echo "::set-env name=packageName::$name"
+        Write-Host 'packageName:'${env:packageName}
