@@ -985,7 +985,7 @@ void MainWindow::LoadOpt(void)
     CodeMask[5]         =ini.value ("opt/codemask_6",mask).toString();
     CodeMask[6]         =ini.value ("opt/codemask_7",mask).toString();
     AutoPos             =ini.value ("opt/autopos",     0).toInt();
-    ScanObs             =ini.value ("opt/scanobs",     0).toInt();
+    ScanObs             =ini.value ("opt/scanobs",     1).toInt();
     HalfCyc             =ini.value ("opt/halfcyc",     0).toInt();
     OutIono             =ini.value ("opt/outiono",     0).toInt();
     OutTime             =ini.value ("opt/outtime",     0).toInt();
