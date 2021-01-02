@@ -25,7 +25,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        qt_ver: [5.15.0]
+        qt_ver: [5.15.2]
         qt_target: [desktop]
         qt_arch: [win64_msvc2019_64,win32_msvc2019]
         include:
@@ -51,6 +51,7 @@ jobs:
         target: ${{ matrix.qt_target }}
         arch: ${{ matrix.qt_arch }}
         cached: ${{ steps.WindowsCacheQt.outputs.cache-hit }}
+        modules: 'qtwebengine'
 
     - uses: actions/checkout@v2
 
@@ -75,7 +76,7 @@ jobs:
       run: |
         New-Item -ItemType Directory ${env:archiveName}
         Copy-Item bin\* ${env:archiveName}\
-        windeployqt --qmldir . ${env:archiveName}\
+        windeployqt --core --network --widgets --xml --qml --gui --serialport --webenginecore --webenginewidgets --printsupport --positioning --quick --quickwidgets ${env:archiveName}\
         Compress-Archive -Path ${env:archiveName} ${env:archiveName}'.zip'
         $name = ${env:archiveName}
         echo "::set-env name=packageName::$name"
