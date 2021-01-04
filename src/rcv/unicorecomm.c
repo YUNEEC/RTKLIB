@@ -648,7 +648,7 @@ static int decode_bd2ephemb(raw_t *raw)
     raw->nav.eph[eph.sat-1]=eph;
     raw->ephsat=eph.sat;
 
-    return 0;
+    return 2;
 }
 /* decode unicore message -----------------------------------------------------*/
 static int decode_unicore(raw_t *raw)
