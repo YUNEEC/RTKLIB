@@ -116,20 +116,14 @@ static int decode_trackstat(unsigned int stat, int *sys, int *code, int *track,
             trace(2,"unicore unknown system: sys=%d\n",satsys);
             return -1;
     }
-    if (*sys==SYS_GPS) {
+    if (*sys==SYS_GPS||*sys==SYS_QZS) {
         switch (sigtype) {
             case  0: freq=0; *code=CODE_L1C; break; /* L1C/A */
             case  9: freq=1; *code=CODE_L2W; break; /* L2Pcodeless */
             default: freq=-1; break;
         }
     }
-    else if (*sys==SYS_QZS) {
-        switch (sigtype) {
-            case  0: freq=0; *code=CODE_L1C; break; /* L1C/A */
-            case  9: freq=1; *code=CODE_L2C; break; /* L2C/A */
-            default: freq=-1; break;
-        }
-    } else if (*sys==SYS_GLO) {
+    else if (*sys==SYS_GLO) {
         switch (sigtype) {
             case  0: freq=0; *code=CODE_L1C; break; /* L1C/A */
             case  5: freq=1; *code=CODE_L2C; break; /* L2C/A */
