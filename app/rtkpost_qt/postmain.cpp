@@ -493,15 +493,15 @@ void MainForm::BtnExecClick()
         showmsg((char*)"error : no output file");
         return;
     }
-    if (OutputFile_Text.contains(".obs",Qt::CaseInsensitive)||
-        OutputFile_Text.contains(".nav",Qt::CaseInsensitive)||
-        OutputFile_Text.contains(".gnav",Qt::CaseInsensitive)||
-        OutputFile_Text.contains(".gz",Qt::CaseInsensitive)||
-        OutputFile_Text.contains(".Z",Qt::CaseInsensitive)||
-        OutputFile_Text.contains(QRegExp(".??o",Qt::CaseInsensitive))||
-        OutputFile_Text.contains(QRegExp(".??d",Qt::CaseInsensitive))||
-        OutputFile_Text.contains(QRegExp(".??n",Qt::CaseInsensitive))||
-        OutputFile_Text.contains(QRegExp(".??g",Qt::CaseInsensitive))){
+    if (OutputFile_Text.contains(QRegExp(".obs$",Qt::CaseInsensitive))||
+        OutputFile_Text.contains(QRegExp(".nav$",Qt::CaseInsensitive))||
+        OutputFile_Text.contains(QRegExp(".gnav$",Qt::CaseInsensitive))||
+        OutputFile_Text.contains(QRegExp(".gz$",Qt::CaseInsensitive))||
+        OutputFile_Text.contains(QRegExp(".Z$",Qt::CaseInsensitive))||
+        OutputFile_Text.contains(QRegExp(".??o$",Qt::CaseInsensitive))||
+        OutputFile_Text.contains(QRegExp(".??d$",Qt::CaseInsensitive))||
+        OutputFile_Text.contains(QRegExp(".??n$",Qt::CaseInsensitive))||
+        OutputFile_Text.contains(QRegExp(".??g$",Qt::CaseInsensitive))){
         showmsg((char*)"error : invalid extension of output file (%s)",qPrintable(OutputFile_Text));
         return;
     }
